@@ -32,6 +32,7 @@ def rk4_first_order(x, y0, derivative_y):
 
 
 # Helper function for Euler and RK4
+'''
 def derivative_state(x, state, last_derivative, args=()):
     derivative = np.zeros_like(state)
 
@@ -41,9 +42,10 @@ def derivative_state(x, state, last_derivative, args=()):
     derivative[-1] = last_derivative(x, state, *args)
 
     return derivative
-
+'''
 
 # These functions solve ODEs of any order
+'''
 def euler(x, y0, nth_derivative_y, args=()):
     dx = np.diff(x)
     n = len(y0)
@@ -56,8 +58,9 @@ def euler(x, y0, nth_derivative_y, args=()):
         y[i + 1] = y[i] + derivative_state(x[i], y[i], nth_derivative_y, args) * dx[i]
 
     return y
+'''
 
-
+'''
 def rk4(x, y0, nth_derivative_y, args=()):
     dx = np.diff(x)
     n = len(y0)
@@ -86,9 +89,24 @@ def rk4(x, y0, nth_derivative_y, args=()):
         y[i + 1] = y[i] + slope * dx[i]
 
     return y
+'''
+
+# These functions solve systems of first order ODEs
+def euler(x, y0, state_derivative, args=()):
+    dx = np.diff(x)
+    n = len(y0)
+
+    y = np.zeros((np.size(x), n))
+    y[0] = y0
+
+    for i in range(len(x) - 1):
+        # y, y', ..., y^(n-1)
+        y[i + 1] = y[i] + state_derivative(x[i], y[i], *args) * dx[i]
+
+    return y
 
 
-def rk4_system(x, y0, state_derivative, args=()):
+def rk4(x, y0, state_derivative, args=()):
     dx = np.diff(x)
     n = len(y0)
 
