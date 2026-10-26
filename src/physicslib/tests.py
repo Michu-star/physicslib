@@ -47,12 +47,6 @@ plt.show()
 '''
 
 # test rk RK4 on a set of coupled ODEs of first order
-'''
-a' = b
-b' = -a
-'''
-
-
 def state_derivative(x, state):
     a, b = state
 
